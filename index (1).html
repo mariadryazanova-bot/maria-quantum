@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Право занимать место — Маша Рязанова</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Nunito:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --navy: #1F2A36;
+    --coastal: #C9DCE6;
+    --beige: #E7DCCF;
+    --blush: #D7B7C2;
+    --tan: #CBB6A2;
+    --cream: #F7F2EC;
+    --text: #2a2a2a;
+    --muted: #7a7065;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    background: var(--navy);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px 80px 80px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-left::after {
+    content: '';
+    position: absolute;
+    right: -40px;
+    top: 0;
+    width: 80px;
+    height: 100%;
+    background: var(--navy);
+    clip-path: polygon(0 0, 0 100%, 100% 100%);
+    z-index: 3;
+  }
+
+  .hero-tag {
+    font-family: 'Nunito', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--blush);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 5vw, 76px);
+    font-weight: 300;
+    line-height: 1.05;
+    color: #fff;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.4s forwards;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--blush);
+  }
+
+  .hero-subtitle {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--coastal);
+    max-width: 400px;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.6s forwards;
+  }
+
+  .hero-cta {
+    display: inline-block;
+    background: var(--blush);
+    color: var(--navy);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.8s forwards;
+    width: fit-content;
+  }
+
+  .hero-cta:hover {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    opacity: 0;
+    animation: fadeIn 1.2s ease 0.3s forwards;
+  }
+
+  .hero-right::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(31,42,54,0.3) 0%, transparent 40%);
+    pointer-events: none;
+  }
+
+  /* ── INTRO STRIP ── */
+  .intro-strip {
+    background: var(--blush);
+    padding: 28px 80px;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    overflow: hidden;
+  }
+
+  .intro-strip p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--navy);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .strip-divider {
+    width: 1px;
+    height: 30px;
+    background: var(--navy);
+    opacity: 0.3;
+    flex-shrink: 0;
+  }
+
+  /* ── SECTION BASE ── */
+  section {
+    padding: 100px 80px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--tan);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 54px);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--navy);
+    margin-bottom: 24px;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--blush);
+  }
+
+  /* ── ARTICLE / POSTS ── */
+  .article-section {
+    background: var(--cream);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin-top: 60px;
+    border: 1px solid rgba(31,42,54,0.1);
+  }
+
+  .post-card {
+    padding: 52px 48px;
+    border: 1px solid rgba(31,42,54,0.08);
+    position: relative;
+    transition: background 0.3s ease;
+  }
+
+  .post-card:hover {
+    background: #fff;
+  }
+
+  .post-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 80px;
+    font-weight: 300;
+    color: var(--coastal);
+    line-height: 1;
+    margin-bottom: 20px;
+    opacity: 0.6;
+  }
+
+  .post-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+
+  .post-text {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.85;
+    color: var(--muted);
+  }
+
+  .post-text strong {
+    color: var(--navy);
+    font-weight: 600;
+  }
+
+  /* ── ABOUT ── */
+  .about-section {
+    background: var(--navy);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    padding: 0;
+  }
+
+  .about-photo {
+    position: relative;
+    overflow: hidden;
+    min-height: 600px;
+  }
+
+  .about-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .about-content {
+    padding: 90px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .about-content .section-label {
+    color: var(--blush);
+    opacity: 0.8;
+  }
+
+  .about-content .section-title {
+    color: #fff;
+  }
+
+  .about-text {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--coastal);
+    margin-bottom: 16px;
+  }
+
+  .about-text strong {
+    color: var(--blush);
+    font-weight: 600;
+  }
+
+  /* ── PROGRAM ── */
+  .program-section {
+    background: var(--beige);
+    max-width: 100%;
+  }
+
+  .program-header {
+    max-width: 700px;
+    margin-bottom: 70px;
+  }
+
+  .blocks-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    background: rgba(31,42,54,0.1);
+  }
+
+  .block-card {
+    background: var(--cream);
+    padding: 40px 36px;
+    transition: background 0.3s;
+  }
+
+  .block-card:hover {
+    background: #fff;
+  }
+
+  .block-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--blush);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .block-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .block-meetings {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--tan);
+    margin-bottom: 16px;
+  }
+
+  .meeting-list {
+    list-style: none;
+  }
+
+  .meeting-list li {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.7;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(31,42,54,0.07);
+  }
+
+  .meeting-list li:last-child { border-bottom: none; }
+
+  /* bonuses */
+  .bonuses {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: rgba(31,42,54,0.1);
+    margin-top: 2px;
+  }
+
+  .bonus-card {
+    background: var(--navy);
+    padding: 36px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .bonus-star {
+    font-size: 22px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .bonus-text {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--coastal);
+  }
+
+  /* ── TESTIMONIAL ── */
+  .testimonial-section {
+    background: var(--blush);
+    padding: 80px;
+    display: flex;
+    align-items: center;
+    gap: 80px;
+  }
+
+  .testimonial-photo {
+    width: 200px;
+    height: 260px;
+    object-fit: cover;
+    object-position: top;
+    flex-shrink: 0;
+    border-radius: 2px;
+  }
+
+  .testimonial-content {}
+
+  .quote-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 120px;
+    line-height: 0.7;
+    color: var(--navy);
+    opacity: 0.15;
+    margin-bottom: -20px;
+  }
+
+  .testimonial-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(24px, 2.5vw, 34px);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--navy);
+    margin-bottom: 24px;
+  }
+
+  .testimonial-author {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--navy);
+    opacity: 0.6;
+  }
+
+  /* ── PRICING ── */
+  .pricing-section {
+    background: var(--cream);
+    text-align: center;
+  }
+
+  .pricing-header {
+    max-width: 600px;
+    margin: 0 auto 70px;
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .price-card {
+    border: 1px solid rgba(31,42,54,0.12);
+    padding: 52px 48px;
+    position: relative;
+    background: #fff;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .price-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(31,42,54,0.1);
+  }
+
+  .price-card.featured {
+    background: var(--navy);
+    border-color: transparent;
+  }
+
+  .price-badge {
+    position: absolute;
+    top: -12px;
+    left: 48px;
+    background: var(--blush);
+    color: var(--navy);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+  }
+
+  .price-type {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--tan);
+    margin-bottom: 20px;
+  }
+
+  .price-card.featured .price-type { color: var(--coastal); }
+
+  .price-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--navy);
+    margin-bottom: 28px;
+    line-height: 1.2;
+  }
+
+  .price-card.featured .price-name { color: #fff; }
+
+  .price-was {
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--tan);
+    text-decoration: line-through;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .price-now {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px;
+    font-weight: 300;
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .price-card.featured .price-now { color: var(--blush); }
+
+  .price-note {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--muted);
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+
+  .price-card.featured .price-note { color: var(--coastal); opacity: 0.7; }
+
+  .price-features {
+    list-style: none;
+    margin-bottom: 40px;
+  }
+
+  .price-features li {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--muted);
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(31,42,54,0.06);
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .price-card.featured .price-features li {
+    color: var(--coastal);
+    border-color: rgba(255,255,255,0.08);
+  }
+
+  .price-features li::before {
+    content: '—';
+    color: var(--blush);
+    flex-shrink: 0;
+    font-size: 12px;
+    margin-top: 3px;
+  }
+
+  .btn-primary {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: var(--blush);
+    color: var(--navy);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 16px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Nunito', sans-serif;
+  }
+
+  .btn-primary:hover {
+    background: var(--navy);
+    color: #fff;
+  }
+
+  .price-card.featured .btn-primary {
+    background: #fff;
+  }
+
+  .price-card.featured .btn-primary:hover {
+    background: var(--blush);
+  }
+
+  /* ── FAQ / OBJECTIONS ── */
+  .objections-section {
+    background: var(--navy);
+  }
+
+  .objections-section .section-title { color: #fff; }
+  .objections-section .section-label { color: var(--blush); opacity: 0.8; }
+
+  .obj-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: rgba(255,255,255,0.05);
+    margin-top: 60px;
+  }
+
+  .obj-card {
+    background: rgba(255,255,255,0.03);
+    padding: 40px 44px;
+    transition: background 0.3s;
+  }
+
+  .obj-card:hover {
+    background: rgba(255,255,255,0.07);
+  }
+
+  .obj-q {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--blush);
+    margin-bottom: 16px;
+    line-height: 1.4;
+  }
+
+  .obj-a {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--coastal);
+  }
+
+  /* ── FOOTER CTA ── */
+  .footer-cta {
+    background: var(--beige);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0;
+    min-height: 500px;
+  }
+
+  .footer-cta-content {
+    padding: 90px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .footer-cta-photo {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .footer-cta-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    padding: 40px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 300;
+    color: #fff;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 32px;
+  }
+
+  .footer-links a {
+    color: var(--coastal);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--blush); }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(31,42,54,0.85);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-overlay.active { display: flex; }
+
+  .modal {
+    background: var(--cream);
+    max-width: 520px;
+    width: 90%;
+    padding: 60px 56px;
+    position: relative;
+    animation: fadeUp 0.4s ease;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--muted);
+    line-height: 1;
+    transition: color 0.2s;
+  }
+
+  .modal-close:hover { color: var(--navy); }
+
+  .modal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+
+  .modal-sub {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--muted);
+    margin-bottom: 36px;
+    line-height: 1.6;
+  }
+
+  .modal-plan {
+    background: var(--navy);
+    padding: 20px 24px;
+    margin-bottom: 28px;
+    display: none;
+  }
+
+  .modal-plan.active { display: block; }
+
+  .modal-plan-name {
+    color: var(--blush);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .modal-plan-price {
+    color: #fff;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--tan);
+    margin-bottom: 8px;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    border: 1px solid rgba(31,42,54,0.15);
+    background: #fff;
+    padding: 14px 16px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s;
+    border-radius: 0;
+    -webkit-appearance: none;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: var(--blush);
+  }
+
+  .form-group textarea { resize: none; height: 80px; }
+
+  .form-submit {
+    width: 100%;
+    background: var(--blush);
+    color: var(--navy);
+    border: none;
+    padding: 16px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 8px;
+  }
+
+  .form-submit:hover {
+    background: var(--navy);
+    color: #fff;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    section { padding: 70px 32px; }
+
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 80px 32px 60px; }
+    .hero-left::after { display: none; }
+    .hero-right { height: 60vw; min-height: 300px; }
+    .hero-right img { object-position: center 20%; }
+
+    .intro-strip { padding: 24px 32px; flex-wrap: wrap; gap: 20px; }
+    .intro-strip p { white-space: normal; font-size: 18px; }
+
+    .posts-grid { grid-template-columns: 1fr; }
+
+    .about-section { grid-template-columns: 1fr; }
+    .about-photo { min-height: 60vw; }
+    .about-content { padding: 60px 32px; }
+
+    .blocks-grid { grid-template-columns: 1fr 1fr; }
+
+    .bonuses { grid-template-columns: 1fr; }
+
+    .testimonial-section { padding: 60px 32px; flex-direction: column; gap: 32px; }
+    .testimonial-photo { width: 100%; height: 300px; }
+
+    .pricing-grid { grid-template-columns: 1fr; max-width: 480px; }
+
+    .obj-grid { grid-template-columns: 1fr; }
+
+    .footer-cta { grid-template-columns: 1fr; }
+    .footer-cta-photo { height: 50vw; }
+    .footer-cta-content { padding: 60px 32px; }
+
+    footer { padding: 32px; flex-direction: column; gap: 20px; text-align: center; }
+
+    .modal { padding: 48px 28px; }
+  }
+
+  @media (max-width: 600px) {
+    .blocks-grid { grid-template-columns: 1fr; }
+    .hero-left { padding: 60px 24px 50px; }
+    section { padding: 60px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<section class="hero" style="padding:0;">
+  <div class="hero-left">
+    <p class="hero-tag">Программа для экспертов</p>
+    <h1 class="hero-title">Право<br>занимать<br><em>место</em></h1>
+    <p class="hero-subtitle">Для тех, кто хочет вести блог — но каждый раз что-то мешает. Без маркетинга. Только внутренняя работа.</p>
+    <a href="#pricing" class="hero-cta">Записаться</a>
+  </div>
+  <div class="hero-right">
+    <img src="DSC09801.png" alt="Маша Рязанова">
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     INTRO STRIP
+══════════════════════════════════════════ -->
+<div class="intro-strip">
+  <p>Маша Рязанова — квантовый коуч, Барселона</p>
+  <div class="strip-divider"></div>
+  <p>8–10 живых встреч раз в неделю</p>
+  <div class="strip-divider"></div>
+  <p>Группа или индивидуально</p>
+  <div class="strip-divider"></div>
+  <p>Работаем с тем, что останавливает изнутри</p>
+</div>
+
+<!-- ══════════════════════════════════════════
+     ARTICLE — 5 POSTS
+══════════════════════════════════════════ -->
+<section style="padding: 100px 80px; background: var(--cream);">
+  <div style="max-width: 1200px; margin: 0 auto;">
+
+    <div class="reveal">
+      <p class="section-label">Узнай себя</p>
+      <h2 class="section-title">Почему эксперты<br><em>бросают блог</em></h2>
+    </div>
+
+    <div class="posts-grid reveal">
+
+      <div class="post-card">
+        <div class="post-number">01</div>
+        <h3 class="post-title">Привет, я Маша</h3>
+        <p class="post-text">
+          Если ты здесь — тебе знакомо чувство постоянно начинать и бросать блог. Я хочу сразу сказать кое-что важное: <strong>это не лень. И не отсутствие дисциплины.</strong> И даже не то, что "просто не твое".<br><br>
+          Я семь лет вела блог как стилист. Периодически пропадала: на месяц, на три, на полгода. Потом феерично возвращалась. Потом снова пропадала. Клиентов было мало, блог не рос, и я искренне не понимала, что делаю не так.<br><br>
+          За это время я слила кучу денег на курсы по маркетингу и контенту. Все курсы были хорошие, инструменты давали рабочие. Но для меня <strong>ничего не менялось.</strong> Потому что проблема была не снаружи.
+        </p>
+      </div>
+
+      <div class="post-card">
+        <div class="post-number">02</div>
+        <h3 class="post-title">Ты уже пробовала. Почему не сработало?</h3>
+        <p class="post-text">
+          Контент-план. Курс по рилсам. SMM-щик. Маркетолог. Новый курс по контенту.<br><br>
+          Вот что происходит каждый раз: в момент покупки курса ты чувствуешь облегчение. Прямо физически выдыхаешь. Мозг получает дофамин и успокаивается.<br><br>
+          А через две недели всё стоит на месте. И ты снова думаешь: <strong>что-то со мной не так, у других же всё работает.</strong><br><br>
+          Ничего не так. Ты просто лечила не то. Контент-план не помогает, когда каждый раз как садишься писать о себе, что-то сжимается внутри. Когда написала пост — и не выложила. Когда знаешь цену, но называешь её шёпотом.<br><br>
+          <strong>Дело не в инструментах. Дело во внутренних настройках.</strong>
+        </p>
+      </div>
+
+      <div class="post-card">
+        <div class="post-number">03</div>
+        <h3 class="post-title">Ты всё ещё думаешь, что тебе нужен новый курс по рилсам?</h3>
+        <p class="post-text">
+          Я часто вижу, как эксперты выгорают от блога именно потому, что берут стратегию, которая им не нравится и не подходит.<br><br>
+          Сегодня огромное количество площадок, и не обязательно изматывать себя рилсами. Но если ты выбрала формат, который тебе нравится — и всё равно стопоришься — вот тогда надо работать не с инструментами и не со стратегией.<br><br>
+          Тогда надо работать с <strong>внутренним разрешением быть видимой.</strong><br><br>
+          Как только убирается то, что мешает заявить о себе, человек берёт и пишет пост. Люди вокруг, наконец, узнают, что можно прийти. Они, может, и раньше бы пришли. Просто не знали.
+        </p>
+      </div>
+
+      <div class="post-card">
+        <div class="post-number">04</div>
+        <h3 class="post-title">Я знаю, что ты сейчас думаешь</h3>
+        <p class="post-text">
+          <strong>"Зачем платить, если можно разобраться самой?"</strong><br>
+          Можно. Но сколько уже разбираешься? Год? Два? Три? Самой можно всё, только иногда это занимает в десять раз дольше.<br><br>
+          <strong>"Я не готова, вот закончу проект / переезд / курс — и тогда…"</strong><br>
+          Это и есть самозванец говорит. Идеального момента не будет.<br><br>
+          <strong>"А вдруг не поможет?"</strong><br>
+          Я сама уже столько раз обжигалась на разных "курсах", поэтому очень хорошо понимаю. Это именно то откладывание, с которым мы работаем.
+        </p>
+      </div>
+
+      <div class="post-card" style="grid-column: 1 / -1;">
+        <div class="post-number">05</div>
+        <h3 class="post-title">Вот что происходит, когда убирается то, что мешает</h3>
+        <p class="post-text" style="max-width: 800px;">
+          Участница написала мне на прошлой неделе: <strong>"Я после твоего аудио сразу пошла и переписала последнее предложение в посте. Ещё написала контент-план на месяц. Это для меня прям… Как гору свернула."</strong><br><br>
+          Контент-план на месяц. За один вечер. После одного аудио.<br><br>
+          Не потому, что я научила её структуре поста. А потому что убралось то, что мешало. Именно с этим мы работаем в программе «Право занимать место» — не с контентом, а с тем, что стоит до него.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     ABOUT
+══════════════════════════════════════════ -->
+<div class="about-section">
+  <div class="about-photo">
+    <img src="DSC09694.png" alt="Маша Рязанова">
+  </div>
+  <div class="about-content reveal">
+    <p class="section-label">О себе</p>
+    <h2 class="section-title">Маша<br><em>Рязанова</em></h2>
+    <p class="about-text">Квантовый коуч. Живу в Барселоне уже 6 лет. До коучинга — 7 лет как стилист. Я прошла весь этот путь сама: покупала курсы, выгорала, пропадала из блога, снова возвращалась.</p>
+    <p class="about-text">Я работаю <strong>на шаг раньше маркетолога.</strong> Маркетолог помогает продвигать — я помогаю убрать то, что мешает начать продвигаться вообще.</p>
+    <p class="about-text">Потому что если внутри есть страх, стыд или ощущение "я недостаточно" — никакой контент-план не поможет. Это знаю по себе.</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PROGRAM
+══════════════════════════════════════════ -->
+<section class="program-section">
+  <div class="program-header reveal">
+    <p class="section-label">Структура программы</p>
+    <h2 class="section-title">«Право занимать место»</h2>
+    <p style="font-size:15px; font-weight:300; color:var(--muted); line-height:1.8; max-width:600px;">10 живых встреч, раз в неделю. Разбираем всё, что реально мешает — по слоям, без осуждения.</p>
+  </div>
+
+  <div class="blocks-grid reveal">
+    <div class="block-card">
+      <div class="block-num">01</div>
+      <div class="block-title">Почему я снова пропала</div>
+      <div class="block-meetings">2 встречи</div>
+      <ul class="meeting-list">
+        <li>Честный старт — дофаминовая ловушка</li>
+        <li>Прокрастинация, которая не прокрастинация</li>
+      </ul>
+    </div>
+    <div class="block-card">
+      <div class="block-num">02</div>
+      <div class="block-title">Что реально останавливает</div>
+      <div class="block-meetings">3 встречи</div>
+      <ul class="meeting-list">
+        <li>Страх оценки и право быть видимой</li>
+        <li>Синдром самозванца: разбираем по слоям</li>
+        <li>Самозванец, деньги и ценность</li>
+      </ul>
+    </div>
+    <div class="block-card">
+      <div class="block-num">03</div>
+      <div class="block-title">Моя система</div>
+      <div class="block-meetings">2 встречи</div>
+      <ul class="meeting-list">
+        <li>Моя природа: система без героизма</li>
+        <li>Регулярность без насилия</li>
+      </ul>
+    </div>
+    <div class="block-card">
+      <div class="block-num">04</div>
+      <div class="block-title">Устойчивость</div>
+      <div class="block-meetings">3 встречи</div>
+      <ul class="meeting-list">
+        <li>Мои триггеры отката</li>
+        <li>Интеграция</li>
+        <li>Финал и праздник</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="bonuses reveal" style="margin-top: 24px;">
+    <div class="bonus-card">
+      <div class="bonus-star">⭐</div>
+      <p class="bonus-text"><strong style="color:#fff; display:block; margin-bottom:6px;">Бонус: Стиль для экспертов</strong>В чём выходить к аудитории, чтобы чувствовать себя уверенно в кадре</p>
+    </div>
+    <div class="bonus-card">
+      <div class="bonus-star">⭐</div>
+      <p class="bonus-text"><strong style="color:#fff; display:block; margin-bottom:6px;">Бонус: Иммигрантский слой</strong>Дополнительная встреча для тех, кто начинал с нуля в новой стране</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     TESTIMONIAL
+══════════════════════════════════════════ -->
+<div class="testimonial-section">
+  <img class="testimonial-photo" src="DSC00130.png" alt="">
+  <div class="testimonial-content reveal">
+    <div class="quote-mark">"</div>
+    <p class="testimonial-text">Я после твоего аудио сразу пошла и переписала последнее предложение в посте. Ещё написала контент-план на месяц. Это для меня прям… Как гору свернула.</p>
+    <p class="testimonial-author">Участница программы</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PRICING
+══════════════════════════════════════════ -->
+<section class="pricing-section" id="pricing">
+  <div class="pricing-header reveal">
+    <p class="section-label">Форматы участия</p>
+    <h2 class="section-title">Выбери <em>свой путь</em></h2>
+    <p style="font-size:14px; font-weight:300; color:var(--muted); line-height:1.7;">Оба формата — одна программа, одна глубина. Разница только в том, как тебе комфортнее работать.</p>
+  </div>
+
+  <div class="pricing-grid reveal">
+
+    <!-- GROUP -->
+    <div class="price-card">
+      <div class="price-badge">Старт 1 мая</div>
+      <div class="price-type">Групповой формат</div>
+      <div class="price-name">Группа до 6 человек</div>
+      <span class="price-was">800€</span>
+      <div class="price-now" id="group-price">350€</div>
+      <p class="price-note" id="group-note">До 27 апреля — раннее бронирование. После — 400€.</p>
+      <ul class="price-features">
+        <li>10 живых групповых встреч</li>
+        <li>Поддержка и энергия группы</li>
+        <li>Работа в безопасном пространстве</li>
+        <li>Оба бонуса включены</li>
+        <li>Чат поддержки между встречами</li>
+      </ul>
+      <button class="btn-primary" onclick="openModal('group')">Записаться в группу</button>
+    </div>
+
+    <!-- INDIVIDUAL -->
+    <div class="price-card featured">
+      <div class="price-type">Индивидуально</div>
+      <div class="price-name">Личная работа<br>со мной</div>
+      <span class="price-was" style="color:var(--coastal); opacity:0.5;">1500€</span>
+      <div class="price-now">750€</div>
+      <p class="price-note">Полностью под тебя — темп, темы, глубина. Твой процесс, твой ритм.</p>
+      <ul class="price-features">
+        <li>10 индивидуальных встреч</li>
+        <li>Программа адаптируется под тебя</li>
+        <li>Личная поддержка между встречами</li>
+        <li>Оба бонуса включены</li>
+        <li>Гибкое расписание</li>
+      </ul>
+      <button class="btn-primary" onclick="openModal('individual')">Записаться индивидуально</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     OBJECTIONS
+══════════════════════════════════════════ -->
+<section class="objections-section">
+  <p class="section-label">Ответы на вопросы</p>
+  <h2 class="section-title">Я знаю, что<br><em>ты думаешь</em></h2>
+
+  <div class="obj-grid reveal">
+    <div class="obj-card">
+      <p class="obj-q">"Зачем платить, если можно разобраться самой?"</p>
+      <p class="obj-a">Можно. Но сколько уже разбираешься? Год? Два? Три? Самой можно всё, только иногда это занимает в десять раз дольше. С тренером в зале результат появляется за месяц — без него годами, если повезёт.</p>
+    </div>
+    <div class="obj-card">
+      <p class="obj-q">"Я не готова. Вот закончу проект — и тогда…"</p>
+      <p class="obj-a">Это и есть самозванец говорит. Идеального момента не будет. Именно это откладывание — одна из первых тем, которые мы разбираем вместе.</p>
+    </div>
+    <div class="obj-card">
+      <p class="obj-q">"Маша не даёт инструментов — за что тогда платить?"</p>
+      <p class="obj-a">Инструменты у тебя уже есть — ты наверняка прошла хотя бы один курс по контенту. Проблема не в инструментах. Проблема в том, что ты их не применяешь. Вот с этим я и работаю.</p>
+    </div>
+    <div class="obj-card">
+      <p class="obj-q">"А вдруг не поможет?"</p>
+      <p class="obj-a">Я сама уже столько раз обжигалась на разных "курсах", поэтому очень хорошо понимаю эти сомнения. Если остались вопросы — просто напиши, я отвечу на всё честно.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     FOOTER CTA
+══════════════════════════════════════════ -->
+<div class="footer-cta">
+  <div class="footer-cta-content reveal">
+    <p class="section-label">Готова начать?</p>
+    <h2 class="section-title" style="color:var(--navy);">Место для тебя<br><em>уже есть</em></h2>
+    <p style="font-size:15px; font-weight:300; color:var(--muted); line-height:1.8; margin-bottom:40px;">Группа стартует 1 мая. Мест мало — специально, чтобы каждой было своё пространство и внимание.</p>
+    <button class="btn-primary" style="width:fit-content; padding:16px 40px;" onclick="openModal('group')">Записаться сейчас</button>
+  </div>
+  <div class="footer-cta-photo">
+    <img src="DSC00061-2.png" alt="Маша Рязанова">
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<footer>
+  <div class="footer-name">Маша Рязанова</div>
+  <div class="footer-links">
+    <a href="https://t.me/maria_quantum" target="_blank">Telegram</a>
+    <a href="https://www.threads.net/@maria_ryazanova_bcn" target="_blank">Threads</a>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════
+     MODAL
+══════════════════════════════════════════ -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <h3 class="modal-title">Записаться</h3>
+    <p class="modal-sub">Оставь контакт — я напишу тебе лично и расскажу все детали.</p>
+
+    <div class="modal-plan active" id="modal-plan-group">
+      <div class="modal-plan-name">Групповой формат</div>
+      <div class="modal-plan-price">350€ <span style="font-size:14px; opacity:0.6;">(до 27.04) / 400€</span></div>
+    </div>
+    <div class="modal-plan" id="modal-plan-individual">
+      <div class="modal-plan-name">Индивидуально</div>
+      <div class="modal-plan-price">750€</div>
+    </div>
+
+    <div class="form-group">
+      <label>Как тебя зовут</label>
+      <input type="text" placeholder="Имя">
+    </div>
+    <div class="form-group">
+      <label>Telegram или email</label>
+      <input type="text" placeholder="@username или email">
+    </div>
+    <div class="form-group">
+      <label>Коротко о себе (не обязательно)</label>
+      <textarea placeholder="Кто ты, чем занимаешься..."></textarea>
+    </div>
+    <button class="form-submit" onclick="submitForm()">Отправить заявку</button>
+  </div>
+</div>
+
+<script>
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // Dynamic group price
+  const today = new Date();
+  const deadline = new Date('2025-04-27');
+  if (today > deadline) {
+    document.getElementById('group-price').textContent = '400€';
+    document.getElementById('group-note').textContent = 'Стандартная цена.';
+  }
+
+  // Modal
+  function openModal(plan) {
+    document.getElementById('modal').classList.add('active');
+    document.getElementById('modal-plan-group').classList.remove('active');
+    document.getElementById('modal-plan-individual').classList.remove('active');
+    document.getElementById('modal-plan-' + plan).classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  function submitForm() {
+    alert('Спасибо! Я напишу тебе в ближайшее время 🧡');
+    closeModal();
+  }
+</script>
+
+</body>
+</html>
