@@ -224,6 +224,12 @@
     transition: background 0.3s ease;
   }
 
+  @media (max-width: 600px) {
+    .post-card {
+      padding: 36px 20px;
+    }
+  }
+
   .post-card:hover {
     background: #fff;
   }
@@ -927,7 +933,8 @@
   @media (max-width: 600px) {
     .blocks-grid { grid-template-columns: 1fr; }
     .hero-left { padding: 60px 24px 50px; }
-    section { padding: 60px 24px; }
+    section { padding: 60px 20px; }
+    .post-card { padding: 36px 20px; }
   }
 </style>
 </head>
@@ -1248,15 +1255,15 @@
 
     <div class="form-group">
       <label>Как тебя зовут</label>
-      <input type="text" placeholder="Имя">
+      <input id="f-name" type="text" placeholder="Имя">
     </div>
     <div class="form-group">
       <label>Telegram или email</label>
-      <input type="text" placeholder="@username или email">
+      <input id="f-contact" type="text" placeholder="@username или email">
     </div>
     <div class="form-group">
       <label>Коротко о себе (не обязательно)</label>
-      <textarea placeholder="Кто ты, чем занимаешься..."></textarea>
+      <textarea id="f-about" placeholder="Кто ты, чем занимаешься..."></textarea>
     </div>
     <button class="form-submit" onclick="submitForm()">Отправить заявку</button>
   </div>
@@ -1301,7 +1308,27 @@
     if (e.target === this) closeModal();
   });
 
-  function submitForm() {
+  async function submitForm() {
+    const name = document.getElementById('f-name').value.trim();
+    const contact = document.getElementById('f-contact').value.trim();
+    const about = document.getElementById('f-about').value.trim();
+    const plan = document.getElementById('modal-plan-individual').classList.contains('active') ? 'Индивидуально — 750€' : 'Группа — 350€/400€';
+
+    if (!name || !contact) {
+      alert('Пожалуйста, заполни имя и контакт 🧡');
+      return;
+    }
+
+    const text = '🧡 Новая заявка с сайта!\n\nФормат: ' + plan + '\nИмя: ' + name + '\nКонтакт: ' + contact + (about ? '\nО себе: ' + about : '');
+
+    try {
+      await fetch('https://api.telegram.org/bot8752539475:AAHYhftrnilKz1HVyNJNVUnvHG9x5kQAaBQ/sendMessage', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chat_id: '227903566', text: text })
+      });
+    } catch(e) { console.error(e); }
+
     alert('Спасибо! Я напишу тебе в ближайшее время 🧡');
     closeModal();
   }
